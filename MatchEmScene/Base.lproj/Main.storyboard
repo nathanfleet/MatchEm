@@ -23,16 +23,30 @@
                                     <action selector="startGameButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="66g-Ct-Dh1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0Z-7P-Sjc">
+                                <rect key="frame" x="96" y="711" width="200" height="60"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Play Again"/>
+                                <connections>
+                                    <action selector="playAgainButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="17G-fX-HdE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="gIu-E7-XFp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="653" id="5XH-3n-qp1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="W0Z-7P-Sjc" secondAttribute="bottom" constant="47" id="E2f-aq-Xdy"/>
+                            <constraint firstItem="W0Z-7P-Sjc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="QnX-Sm-nhJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="W0Z-7P-Sjc" secondAttribute="trailing" constant="97" id="Vu4-ha-Yhw"/>
                             <constraint firstItem="gIu-E7-XFp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="fst-Zr-fMK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gIu-E7-XFp" secondAttribute="trailing" constant="97" id="kMc-bz-5zw"/>
+                            <constraint firstItem="W0Z-7P-Sjc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="652" id="tKZ-g1-QTf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gIu-E7-XFp" secondAttribute="bottom" constant="46" id="zW1-Ac-mKR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="playAgainButton" destination="W0Z-7P-Sjc" id="CRg-ZC-g0h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,7 +7,9 @@
 
 import UIKit
 
+// TODO: Add labels to display counts and scores
 class ViewController: UIViewController {
+    @IBOutlet weak var playAgainButton: UIButton!
     var firstClickedRectangle: UIButton?
     var score: Int = 0
     var rectangleTimer: Timer?
@@ -15,13 +17,26 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: Make labels
+        playAgainButton.isHidden = true
     }
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
-        startGame()
         sender.removeFromSuperview()
+        startGame()
+    }
+    
+    @IBAction func playAgainButtonPressed(_ sender: UIButton) {
+        firstClickedRectangle = nil
+        score = 0
+        
+        for subview in self.view.subviews {
+            if subview != playAgainButton {
+                subview.removeFromSuperview()
+            }
+        }
+        
+        sender.isHidden = true
+        startGame()
     }
     
     @objc func drawRectangles() {
@@ -29,10 +44,11 @@ class ViewController: UIViewController {
         for rect in pair { self.view.addSubview(rect) }
     }
 
+    // TODO: make the highlight more appealing
+    // TODO: make the matched rectangles dissappear with animation
     @objc func rectangleClicked(_ sender: UIButton) {
         if firstClickedRectangle == nil {
             firstClickedRectangle = sender
-            // TODO: make this more appealing
             sender.layer.borderWidth = 5
             sender.layer.borderColor = UIColor.white.cgColor
         } else if firstClickedRectangle?.tag == sender.tag && firstClickedRectangle != sender {
@@ -96,9 +112,8 @@ class ViewController: UIViewController {
     }
     
     func startGame() {
-        // TODO: initialize running timer which quits the game at 12 seconds
-        rectangleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
         gameTimer = Timer.scheduledTimer(timeInterval: 12.0, target: self, selector: #selector(endGame), userInfo: nil, repeats: false)
+        rectangleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
     }
     
     @objc func endGame() {
@@ -107,6 +122,7 @@ class ViewController: UIViewController {
         
         gameTimer?.invalidate()
         gameTimer = nil
+        
+        playAgainButton.isHidden = false
     }
 }
-
