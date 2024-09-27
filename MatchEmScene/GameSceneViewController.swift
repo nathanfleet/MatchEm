@@ -8,12 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var timer: Timer?
     var firstClickedRectangle: UIButton?
     var score: Int = 0
+    var rectangleTimer: Timer?
+    var gameTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO: Make labels
     }
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
@@ -22,7 +25,7 @@ class ViewController: UIViewController {
     }
     
     @objc func drawRectangles() {
-        let pair = self.generateRectanglePair()
+        let pair = generateRectanglePair()
         for rect in pair { self.view.addSubview(rect) }
     }
 
@@ -36,6 +39,7 @@ class ViewController: UIViewController {
             score += 1
             firstClickedRectangle?.removeFromSuperview()
             sender.removeFromSuperview()
+            firstClickedRectangle = nil
         } else {
             sender.layer.borderWidth = 0
             firstClickedRectangle?.layer.borderWidth = 0
@@ -50,8 +54,8 @@ class ViewController: UIViewController {
         // TODO: use a global static variable instead
         let tag = Int.random(in: 1...1000)
         
-        let randomWidth = CGFloat.random(in: 50...150)
-        let randomHeight = CGFloat.random(in: 50...150)
+        let randomWidth = CGFloat.random(in: 50...100)
+        let randomHeight = CGFloat.random(in: 50...100)
         let randomSize = CGSize(width: randomWidth, height: randomHeight)
         let randomColor = UIColor(
             red: CGFloat.random(in: 0...1),
@@ -73,6 +77,11 @@ class ViewController: UIViewController {
                     if frame.intersects(subview.frame) {
                         overlap = true
                         break
+                    } else if !rectangles.isEmpty {
+                        if frame.intersects(rectangles[0].frame) {
+                            overlap = true
+                            break
+                        }
                     }
                 }
             } while overlap
@@ -88,8 +97,16 @@ class ViewController: UIViewController {
     
     func startGame() {
         // TODO: initialize running timer which quits the game at 12 seconds
+        rectangleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 12.0, target: self, selector: #selector(endGame), userInfo: nil, repeats: false)
+    }
+    
+    @objc func endGame() {
+        rectangleTimer?.invalidate()
+        rectangleTimer = nil
         
-        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
+        gameTimer?.invalidate()
+        gameTimer = nil
     }
 }
 
