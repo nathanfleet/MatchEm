@@ -9,16 +9,31 @@ import UIKit
 
 // TODO: Add labels to display counts and scores
 class ViewController: UIViewController {
+    @IBOutlet weak var pairsLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var playAgainButton: UIButton!
+    
     var firstClickedRectangle: UIButton?
-    var score: Int = 0
     var rectangleTimer: Timer?
     var gameTimer: Timer?
+    var timeRemaining: Int = 12
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "SCORE: \(score)"
+        }
+    }
+    var pairs: Int = 0 {
+        didSet {
+            pairsLabel.text = "PAIRS: \(pairs)"
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playAgainButton.isHidden = true
     }
+    
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         sender.removeFromSuperview()
@@ -26,15 +41,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func playAgainButtonPressed(_ sender: UIButton) {
+        updateLabels()
         firstClickedRectangle = nil
-        score = 0
-        
-        for subview in self.view.subviews {
-            if subview != playAgainButton {
-                subview.removeFromSuperview()
-            }
-        }
-        
         sender.isHidden = true
         startGame()
     }
@@ -42,10 +50,12 @@ class ViewController: UIViewController {
     @objc func drawRectangles() {
         let pair = generateRectanglePair()
         for rect in pair { self.view.addSubview(rect) }
+        pairs += 1
+        updateLabels()
     }
 
     // TODO: make the highlight more appealing
-    // TODO: make the matched rectangles dissappear with animation
+    // TODO: make the matched rectangles dissappear with animationm
     @objc func rectangleClicked(_ sender: UIButton) {
         if firstClickedRectangle == nil {
             firstClickedRectangle = sender
@@ -53,6 +63,7 @@ class ViewController: UIViewController {
             sender.layer.borderColor = UIColor.white.cgColor
         } else if firstClickedRectangle?.tag == sender.tag && firstClickedRectangle != sender {
             score += 1
+            updateLabels()
             firstClickedRectangle?.removeFromSuperview()
             sender.removeFromSuperview()
             firstClickedRectangle = nil
@@ -112,17 +123,45 @@ class ViewController: UIViewController {
     }
     
     func startGame() {
-        gameTimer = Timer.scheduledTimer(timeInterval: 12.0, target: self, selector: #selector(endGame), userInfo: nil, repeats: false)
+        gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         rectangleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
     }
     
-    @objc func endGame() {
+    @objc func updateTime() {
+        timeRemaining -= 1
+        updateLabels()
+        
+        if timeRemaining <= 0 {
+            endGame()
+        }
+    }
+    
+    func endGame() {
         rectangleTimer?.invalidate()
         rectangleTimer = nil
         
         gameTimer?.invalidate()
         gameTimer = nil
         
+        timeRemaining = 12
+        score = 0
+        pairs = 0
+        
+        for subview in self.view.subviews {
+            if subview != playAgainButton
+                && subview != pairsLabel
+                && subview != timeLabel
+                && subview != scoreLabel {
+                subview.removeFromSuperview()
+            }
+        }
+        
         playAgainButton.isHidden = false
+    }
+    
+    func updateLabels() {
+        timeLabel.text = "TIME: \(timeRemaining)s"
+        scoreLabel.text = "SCORE: \(score)"
+        pairsLabel.text = "PAIRS: \(pairs)"
     }
 }
