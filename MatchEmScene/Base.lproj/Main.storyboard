@@ -25,13 +25,14 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <buttonConfiguration key="configuration" style="filled" title="START GAME">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="25"/>
+                                    <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="startGameButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="66g-Ct-Dh1"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4D-68-0hF">
-                                <rect key="frame" x="151.33333333333334" y="77" width="90.666666666666657" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: 00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4D-68-0hF">
+                                <rect key="frame" x="144.66666666666666" y="77" width="104" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,20 +43,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAIRS: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ot-Wt-XOz">
-                                <rect key="frame" x="16" y="77" width="81" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAIRS: 00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ot-Wt-XOz">
+                                <rect key="frame" x="20.666666666666671" y="77" width="95" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECORD: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZO-XL-oyV">
-                                <rect key="frame" x="118" y="273.66666666666669" width="157" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECORD: 00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZO-XL-oyV">
+                                <rect key="frame" x="108" y="273.66666666666669" width="177" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FINAL SCORE: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJa-7s-DSX">
-                                <rect key="frame" x="65" y="189.66666666666666" width="263" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FINAL SCORE: 00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJa-7s-DSX">
+                                <rect key="frame" x="53" y="189.66666666666666" width="287" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -69,16 +70,23 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <buttonConfiguration key="configuration" style="filled" title="PLAY AGAIN">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="25"/>
+                                    <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="playAgainButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="17G-fX-HdE"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MATCHEM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDh-Yn-nqV">
+                                <rect key="frame" x="69.666666666666686" y="221" width="254" height="60"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4ot-Wt-XOz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="4Fn-Rp-GwL"/>
+                            <constraint firstItem="yDh-Yn-nqV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LDx-Uh-I1r"/>
                             <constraint firstItem="W0Z-7P-Sjc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mom-od-NNq"/>
                             <constraint firstItem="Mrf-Hg-4Kt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="OGz-lU-Uuy"/>
                             <constraint firstItem="gIu-E7-XFp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qdr-vP-wbW"/>
@@ -90,8 +98,11 @@
                             <constraint firstItem="CJa-7s-DSX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f1q-21-n9E"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="W0Z-7P-Sjc" secondAttribute="bottom" constant="46" id="gfB-b6-5dK"/>
                             <constraint firstItem="W0Z-7P-Sjc" firstAttribute="top" secondItem="PZO-XL-oyV" secondAttribute="bottom" constant="397.32999999999998" id="mfG-OK-EXi"/>
+                            <constraint firstItem="4ot-Wt-XOz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-128.5" id="nqN-VQ-64s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gIu-E7-XFp" secondAttribute="bottom" constant="199" id="qhF-ev-9Ja"/>
-                            <constraint firstItem="4ot-Wt-XOz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wdk-KO-AwK"/>
+                            <constraint firstItem="yDh-Yn-nqV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-175" id="riq-au-sCp"/>
+                            <constraint firstItem="4ot-Wt-XOz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="rz3-LN-AQv"/>
+                            <constraint firstItem="Mrf-Hg-4Kt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="135.33000000000001" id="vIt-v2-z0W"/>
                         </constraints>
                     </view>
                     <connections>
@@ -101,6 +112,7 @@
                         <outlet property="recordLabel" destination="PZO-XL-oyV" id="bCM-3m-S4G"/>
                         <outlet property="scoreLabel" destination="F4D-68-0hF" id="CbZ-iE-mkn"/>
                         <outlet property="timeLabel" destination="Mrf-Hg-4Kt" id="KYa-yt-wUL"/>
+                        <outlet property="titleLabel" destination="yDh-Yn-nqV" id="F9S-83-DBq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
