@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playAgainButton: UIButton!
     @IBOutlet weak var finalScoreLabel: UILabel!
     @IBOutlet weak var recordLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var firstClickedRectangle: UIButton?
     
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
             pairsLabel.text = "PAIRS: \(pairs)"
         }
     }
+    var tag = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         sender.removeFromSuperview()
+        titleLabel.removeFromSuperview()
         startGame()
     }
     
@@ -68,7 +71,7 @@ class ViewController: UIViewController {
             UIView.animate(withDuration: 0.3, animations: {
                 self.firstClickedRectangle?.alpha = 0
                 rectangle.alpha = 0
-            }) { _ in
+            }) {_ in
                 self.firstClickedRectangle?.removeFromSuperview()
                 rectangle.removeFromSuperview()
                 self.firstClickedRectangle = nil
@@ -93,8 +96,6 @@ class ViewController: UIViewController {
     func generateRectanglePair() -> [UIButton] {
         var rectangles: [UIButton] = []
         
-        let tag = Int.random(in: 1...1000)
-        
         let randomWidth = CGFloat.random(in: 50...100)
         let randomHeight = CGFloat.random(in: 50...100)
         let randomSize = CGSize(width: randomWidth, height: randomHeight)
@@ -107,27 +108,10 @@ class ViewController: UIViewController {
         
         for _ in 0..<2{
             let rectangle = UIButton()
-            var overlap: Bool
             var frame: CGRect
-            repeat {
-                let x = CGFloat.random(in: self.view.frame.minX...(self.view.frame.maxX - randomWidth))
-                let y = CGFloat.random(in: self.view.safeAreaInsets.top...(self.view.frame.maxY - randomHeight - self.view.safeAreaInsets.bottom))
-                frame = CGRect(origin: CGPoint(x: x, y: y), size: randomSize)
-                overlap = false
-                for subview in self.view.subviews {
-                    if frame.intersects(subview.frame) {
-                        overlap = true
-                        break
-                    } else if !rectangles.isEmpty {
-                        // fixed the case where the rectangle would still overlap
-                        // the rectangle that hasnt been added to the view yet
-                        if frame.intersects(rectangles[0].frame) {
-                            overlap = true
-                            break
-                        }
-                    }
-                }
-            } while overlap
+            let x = CGFloat.random(in: self.view.frame.minX...(self.view.frame.maxX - randomWidth))
+            let y = CGFloat.random(in: 77...(self.view.frame.maxY - randomHeight - self.view.safeAreaInsets.bottom))
+            frame = CGRect(origin: CGPoint(x: x, y: y), size: randomSize)
                         
             rectangle.frame = frame
             rectangle.backgroundColor = randomColor
@@ -135,6 +119,7 @@ class ViewController: UIViewController {
             rectangle.addTarget(self, action: #selector(rectangleClicked(_:)), for: .touchUpInside)
             rectangles.append(rectangle)
         }
+        tag += 1
         return rectangles
     }
     
