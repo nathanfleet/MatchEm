@@ -1,13 +1,13 @@
 //
-//  MatchEmSceneUITests.swift
-//  MatchEmSceneUITests
+//  MatchEmTabUITests.swift
+//  MatchEmTabUITests
 //
-//  Created by Nathan Fleet on 9/24/24.
+//  Created by Nathan Fleet on 10/16/24.
 //
 
 import XCTest
 
-final class MatchEmSceneUITests: XCTestCase {
+final class MatchEmTabUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

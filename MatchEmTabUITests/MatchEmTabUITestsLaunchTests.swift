@@ -1,13 +1,13 @@
 //
-//  MatchEmSceneUITestsLaunchTests.swift
-//  MatchEmSceneUITests
+//  MatchEmTabUITestsLaunchTests.swift
+//  MatchEmTabUITests
 //
-//  Created by Nathan Fleet on 9/24/24.
+//  Created by Nathan Fleet on 10/16/24.
 //
 
 import XCTest
 
-final class MatchEmSceneUITestsLaunchTests: XCTestCase {
+final class MatchEmTabUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

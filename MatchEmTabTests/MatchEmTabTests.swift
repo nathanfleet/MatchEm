@@ -1,14 +1,14 @@
 //
-//  MatchEmSceneTests.swift
-//  MatchEmSceneTests
+//  MatchEmTabTests.swift
+//  MatchEmTabTests
 //
-//  Created by Nathan Fleet on 9/24/24.
+//  Created by Nathan Fleet on 10/16/24.
 //
 
 import Testing
-@testable import MatchEmScene
+@testable import MatchEmTab
 
-struct MatchEmSceneTests {
+struct MatchEmTabTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
