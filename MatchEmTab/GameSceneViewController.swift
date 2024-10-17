@@ -16,10 +16,13 @@ class GameSceneViewController: UIViewController {
     @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
+    var rectangleAlpha: CGFloat = 1.0
+    
     var firstClickedRectangle: UIButton?
     
     var rectangleTimer: Timer?
     var gameTimer: Timer?
+    var paused: Bool = false
     
     var timeRemaining: Int = 12
     var record: Int = 0
@@ -103,7 +106,7 @@ class GameSceneViewController: UIViewController {
             red: CGFloat.random(in: 0...1),
             green: CGFloat.random(in: 0...1),
             blue: CGFloat.random(in: 0...1),
-            alpha: 1.0
+            alpha: gameModel.rectangleAlpha
         )
         
         for _ in 0..<2{
@@ -135,6 +138,17 @@ class GameSceneViewController: UIViewController {
         if timeRemaining <= 0 {
             endGame()
         }
+    }
+    
+    func pause() {
+        gameModel.paused = true
+        rectangleTimer?.invalidate()
+        gameTimer?.invalidate()
+    }
+    
+    func resume() {
+        gameModel.paused = false
+        startGame()
     }
     
     func endGame() {

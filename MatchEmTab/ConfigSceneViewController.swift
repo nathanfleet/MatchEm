@@ -11,8 +11,6 @@ class ConfigSceneViewController: UIViewController {
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var alphaSwitch: UISwitch!
-    
-    var gameSceneVC: GameSceneViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +20,21 @@ class ConfigSceneViewController: UIViewController {
         speedLabel.text = "Speed: \(speedSlider.value)x"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        gameModel.paused = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        gameModel.paused = false
+    }
+    
     @IBAction func alphaSwitchChanged(_ s: UISwitch) {
         if s.isOn {
-            // gameSceneVC?.rectangleAlpha = 1.0
+            gameModel.rectangleAlpha = 1.0
         } else {
-            // gameSceneVC?.rectangleAlpha = 0.5
+            gameModel.rectangleAlpha = 0.5
         }
     }
     

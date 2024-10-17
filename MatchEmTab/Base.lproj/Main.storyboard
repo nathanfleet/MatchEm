@@ -25,7 +25,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0I-LX-G0T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-793" y="-927"/>
+            <point key="canvasLocation" x="-1025" y="-970"/>
         </scene>
         <!--GameSceneViewController-->
         <scene sceneID="tne-QT-ifu">
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="237" y="-1265"/>
+            <point key="canvasLocation" x="111" y="-1299"/>
         </scene>
         <!--ConfigSceneViewController-->
         <scene sceneID="InN-la-7WE">
@@ -205,7 +205,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Cf-ZX-7of" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="5bp-Zd-ABv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="235.87786259541983" y="-563.38028169014092"/>
+            <point key="canvasLocation" x="111" y="-620"/>
         </scene>
     </scenes>
     <resources>
