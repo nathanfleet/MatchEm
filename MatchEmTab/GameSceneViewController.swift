@@ -8,12 +8,14 @@
 import UIKit
 
 class GameSceneViewController: UIViewController {
+    var gameInProgress = false
+    var gameRunning = false
+
     @IBOutlet weak var pairsLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var playAgainButton: UIButton!
     @IBOutlet weak var finalScoreLabel: UILabel!
-    @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
     var rectangleAlpha: CGFloat = 1.0
@@ -25,7 +27,6 @@ class GameSceneViewController: UIViewController {
     var paused: Bool = false
     
     var timeRemaining: Int = 12
-    var record: Int = 0
     var score: Int = 0 {
         didSet {
             scoreLabel.text = "SCORE: \(score)"
@@ -42,9 +43,22 @@ class GameSceneViewController: UIViewController {
         super.viewDidLoad()
         playAgainButton.isHidden = true
         finalScoreLabel.isHidden = true
-        recordLabel.isHidden = true
+        timeRemaining = GameManager.shared.gameDuration
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if gameInProgress {
+            pause()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if gameInProgress && !gameRunning {
+            resume()
+        }
+    }
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         sender.removeFromSuperview()
@@ -57,7 +71,6 @@ class GameSceneViewController: UIViewController {
         firstClickedRectangle = nil
         sender.isHidden = true
         finalScoreLabel.isHidden = true
-        recordLabel.isHidden = true
         startGame()
     }
     
@@ -102,12 +115,43 @@ class GameSceneViewController: UIViewController {
         let randomWidth = CGFloat.random(in: 50...100)
         let randomHeight = CGFloat.random(in: 50...100)
         let randomSize = CGSize(width: randomWidth, height: randomHeight)
-        let randomColor = UIColor(
-            red: CGFloat.random(in: 0...1),
-            green: CGFloat.random(in: 0...1),
-            blue: CGFloat.random(in: 0...1),
-            alpha: gameModel.rectangleAlpha
-        )
+        var randomColor: UIColor
+
+        let colorOption = GameManager.shared.rectangleColorOption
+        switch colorOption {
+        case 0:
+            // All colors
+            randomColor = UIColor(
+                red: CGFloat.random(in: 0...1),
+                green: CGFloat.random(in: 0...1),
+                blue: CGFloat.random(in: 0...1),
+                alpha: GameManager.shared.rectangleAlpha
+            )
+        case 1:
+            // No blue component
+            randomColor = UIColor(
+                red: CGFloat.random(in: 0...1),
+                green: CGFloat.random(in: 0...1),
+                blue: 0,
+                alpha: GameManager.shared.rectangleAlpha
+            )
+        case 2:
+            // Shades of gray
+            let gray = CGFloat.random(in: 0...1)
+            randomColor = UIColor(
+                red: gray,
+                green: gray,
+                blue: gray,
+                alpha: GameManager.shared.rectangleAlpha
+            )
+        default:
+            randomColor = UIColor(
+                red: CGFloat.random(in: 0...1),
+                green: CGFloat.random(in: 0...1),
+                blue: CGFloat.random(in: 0...1),
+                alpha: GameManager.shared.rectangleAlpha
+            )
+        }
         
         for _ in 0..<2{
             let rectangle = UIButton()
@@ -118,6 +162,7 @@ class GameSceneViewController: UIViewController {
                         
             rectangle.frame = frame
             rectangle.backgroundColor = randomColor
+            rectangle.alpha = GameManager.shared.rectangleAlpha
             rectangle.tag = tag
             rectangle.addTarget(self, action: #selector(rectangleClicked(_:)), for: .touchUpInside)
             rectangles.append(rectangle)
@@ -125,10 +170,16 @@ class GameSceneViewController: UIViewController {
         tag += 1
         return rectangles
     }
+
     
     func startGame() {
+        timeRemaining = GameManager.shared.gameDuration
+        updateLabels()
+        gameInProgress = true
+        gameRunning = true
+        
         gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-        rectangleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
+        rectangleTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / GameManager.shared.rectangleAppearanceSpeed), target: self, selector: #selector(drawRectangles), userInfo: nil, repeats: true)
     }
     
     @objc func updateTime() {
@@ -141,13 +192,13 @@ class GameSceneViewController: UIViewController {
     }
     
     func pause() {
-        gameModel.paused = true
         rectangleTimer?.invalidate()
         gameTimer?.invalidate()
+        gameRunning = false
     }
     
     func resume() {
-        gameModel.paused = false
+        gameRunning = true
         startGame()
     }
     
@@ -158,27 +209,27 @@ class GameSceneViewController: UIViewController {
         gameTimer?.invalidate()
         gameTimer = nil
         
+        GameManager.shared.addScore(score)
+        
         // remove remaining rectangles
         for subview in self.view.subviews {
             if subview != playAgainButton
                 && subview != pairsLabel
                 && subview != timeLabel
                 && subview != scoreLabel
-                && subview != recordLabel
                 && subview != finalScoreLabel {
                 subview.removeFromSuperview()
             }
         }
         
-        record = max(score, record)
-        
-        recordLabel.text = "RECORD: \(record)"
         finalScoreLabel.text = "FINAL SCORE: \(score)"
         finalScoreLabel.isHidden = false
-        recordLabel.isHidden = false
+        
+        gameInProgress = false
+        gameRunning = false
         
         score = 0
-        timeRemaining = 12
+        timeRemaining = GameManager.shared.gameDuration
         pairs = 0
         
         playAgainButton.isHidden = false
