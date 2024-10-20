@@ -23,7 +23,7 @@ class GameManager {
     }
     
     var rectangleAppearanceSpeed: Float = 1.0
-    var rectangleAlpha: CGFloat = 1.0
+    var allowOverlap: Bool = true
     var rectangleColorOption: Int = 0
     var gameDuration: Int = 12
 }

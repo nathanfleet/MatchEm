@@ -10,7 +10,7 @@ import UIKit
 class ConfigSceneViewController: UIViewController {
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var speedSlider: UISlider!
-    @IBOutlet weak var alphaSwitch: UISwitch!
+    @IBOutlet weak var overlapToggle: UISwitch!
     @IBOutlet weak var colorSegmentedControl: UISegmentedControl!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var durationStepper: UIStepper!
@@ -43,8 +43,9 @@ class ConfigSceneViewController: UIViewController {
         GameManager.shared.rectangleColorOption = s.selectedSegmentIndex
     }
     
-    @IBAction func alphaSwitchChanged(_ s: UISwitch) {
-        GameManager.shared.rectangleAlpha = s.isOn ? 1.0 : 0.5
+    
+    @IBAction func overlapToggleChanged(_ s: UISwitch) {
+        GameManager.shared.allowOverlap = s.isOn
     }
     
     @IBAction func speedSliderChanged(_ s: UISlider) {
